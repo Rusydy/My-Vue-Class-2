@@ -1,26 +1,56 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <div :class="classObject">{{ value }}</div>
+
+    <button type="button" @click="value++">+</button>
+    <button type="button" @click="value--">-</button>
+    <!-- <button type="button" @click="error = ! error">error</button> -->
+    <!-- <button type="button" @click="warning = ! warning">warning</button> -->
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'app',
+
+    data: function () {
+      return {
+        value: 8,
+        error: false,
+        warning: false,
+      }
+    },
+
+    computed: {
+      classObject: function () {
+        return {
+        'red-error' : this.value >= 10, 
+        // 'normal-green': 5 < this.value < 10,
+        'yellow-warning' : this.value <= 5,
+        }
+      }
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    font-size: 40px;
+    text-align: center;
+    padding-top: 100px;
+  }
+
+  .red-error {
+    background-color: darkred;
+  }
+
+  .yellow-warning {
+    background-color: yellow;
+  }
+
+  .normal-green{
+    background-color: green;
+  }
 </style>
